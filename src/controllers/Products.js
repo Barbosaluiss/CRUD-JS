@@ -1,12 +1,21 @@
+const Produtos = require("../models/Produtos")
+
 const Products = {
-    list(req, res){
-        res.json([{"nome": "produto1"}, {"nome": "produto2"}])
+    async list(req, res){
+        const lista = await Produtos.findAll()
+
+        res.json(lista)
     },
 
-    register(req, res){
-        console.log(req.body)
-
-        res.json(req.body)
+    async register(req, res){
+        const { nome, preco, quantidade } = req.body
+        
+        const novoProduto = await Produtos.create({
+            nome, 
+            preco,
+            quantidade, 
+        })
+        res.json(novoProduto)
     }
 }
 
