@@ -16,6 +16,35 @@ const Products = {
             quantidade, 
         })
         res.json(novoProduto)
+    },
+
+    async delete(req, res){
+        const {id} = req.params
+
+        await Produtos.destroy({
+            where:{
+                id
+            }
+        })
+
+        res.json("Produto deletado!")
+    },
+
+    async $update(req, res){
+        const {id} = req.params
+        const {nome, preco, quantidade} = req.body
+
+        const updateProduct = await Produtos.update({
+            nome,
+            preco,
+            quantidade
+        }, {
+            where: {
+                id
+            }
+        })
+
+        res.json("Produto atualizado!")
     }
 }
 
