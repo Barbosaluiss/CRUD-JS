@@ -2,9 +2,7 @@ const {Suppliers, Products} = require("../models/index");
 
 const supplier = {
     async $list(req, res){
-       const allSuppliers = await Suppliers.findAll({
-            include: Products,
-       });
+       const allSuppliers = await Suppliers.findAll();
 
        res.json(allSuppliers);
     },
