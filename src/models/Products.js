@@ -1,5 +1,6 @@
 const db = require("../database/index");
 const {DataTypes} = require("sequelize");
+const Suppliers = require("./Suppliers");
 
 const Products = db.define("Products", {
     id: {
@@ -18,6 +19,14 @@ const Products = db.define("Products", {
 
     quantity: {
         type: DataTypes.INTEGER,
+    },
+
+    supplier_id:{
+        type: DataTypes.INTEGER,
+        references: {
+            model: Suppliers,
+            key: 'id',
+        },
     },
 
     createdAt: {
