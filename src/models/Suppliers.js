@@ -23,4 +23,4 @@ const Suppliers = db.define("Suppliers", {
     tableName: 'suppliers',
 });
 
-module.exports = Suppliers;
+module.exports = Suppliers; 
