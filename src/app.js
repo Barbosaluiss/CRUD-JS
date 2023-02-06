@@ -1,14 +1,14 @@
-const express = require("express")
-const routes = require("./routes/index")
-const db = require("./database/index")
+const express = require("express");
+const routes = require("./routes/index");
+const db = require("./database/index");
 
-const app = express()
+const app = express();
 
-db.hasConnection()
+db.hasConnection();
 
-app.use(express.json())
-app.use(routes)
+app.use(express.json());
+app.use(routes);
 
-app.listen(3000, ()=>{
-    console.log("Server running at port 3000");
-})
+app.listen("3000", ()=>{
+    console.log("Server running at port 3000...");
+});
