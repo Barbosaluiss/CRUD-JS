@@ -2,6 +2,7 @@ const Products = require("./Products");
 const Suppliers = require("./Suppliers");
 const Categories = require("./Categories");
 const CategoryProduct = require("./CategoryProduct");
+const Users = require("./Users");
 
 Products.belongsTo(Suppliers, {
     foreignKey: 'supplier_id',
@@ -25,4 +26,5 @@ module.exports = {
     Products,
     Suppliers, 
     Categories,
+    Users,
 };
