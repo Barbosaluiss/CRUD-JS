@@ -2,9 +2,11 @@ const express = require("express");
 const product = require("../controllers/product");
 const supplier = require("../controllers/supplier");
 const category = require("../controllers/category");
+const authenticate = require("../controllers/authenticate");
 const user = require("../controllers/user");
 const block = require("../middlewares/block");
 const userValidation = require("../validations/users/create");
+const loginAuthentication = require("../validations/authentication/login");
 
 const routes = express.Router();
 
@@ -22,5 +24,7 @@ routes.post("/categories", category.$register);
 
 routes.post("/users", userValidation, user.$register);
 routes.get("/users", user.$list);
+
+routes.post("/login", loginAuthentication, authenticate.$login);
 
 module.exports = routes;
