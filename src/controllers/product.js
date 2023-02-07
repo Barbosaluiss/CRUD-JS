@@ -1,16 +1,16 @@
-const {Products, Suppliers} = require("../models/index");
+const {Products, Suppliers, Categories} = require("../models/index");
 
 const product = {
     async $list(req, res){
         const allProducts = await Products.findAll({
-            include: Suppliers, 
+            include: Categories, 
         });
 
         res.json(allProducts);
     },
 
     async $register(req, res){
-        const {product_name, price, quantity, supplier_id} = req.body;
+        const {product_name, price, quantity, supplier_id, category_id} = req.body;
 
         const newProduct = await Products.create({
             product_name,
@@ -18,6 +18,9 @@ const product = {
             quantity,
             supplier_id,
         });
+
+        const category = await Categories.findByPk(category_id);
+        await newProduct.setCategories(category);
 
         res.json(newProduct);
     },
