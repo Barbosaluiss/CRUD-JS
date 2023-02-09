@@ -15,21 +15,16 @@ const product = {
 
     async $register(req, res){
         try {
-        const {product_name, price, quantity, supplier_id, category_id} = req.body;
-
-        const newProduct = await Products.create({
-            product_name,
-            price,
-            quantity,
-            supplier_id,
-        });
-
-        const category = await Categories.findByPk(category_id);
-        await newProduct.setCategories(category);
-
-        res.status(201).json(newProduct);
+            const {product_name, price, quantity, supplier_id} = req.body;
+            const newProduct = await Products.create({
+                product_name,
+                price,
+                quantity,
+                supplier_id,
+            });  
+            res.status(200).json(newProduct);
         } catch (error) {
-            return res.status(500).json("[ERROR]!");    
+            return req.status(500).json("Failure when try to register a product!");
         };
     },
 
@@ -38,14 +33,14 @@ const product = {
             const {id} = req.params;
 
             if(!id) return res.status(401).json("Missing ID!");
-        
-        await Products.destroy({
-            where: {
-                id,
-            },
-        });
+            
+            await Products.destroy({
+                where: {
+                    id,
+                },
+            });
 
-        res.status(204);
+            res.status(204).json("Product Deleted!");
         } catch (error) {
             return res.status(500).json(`[ERROR]`);
         };
@@ -53,22 +48,22 @@ const product = {
     
     async $update(req, res){
         try {
-        const {id} = req.params;
-        const {product_name, price, quantity} = req.body;
+            const {id} = req.params;
+            const {product_name, price, quantity} = req.body;
 
-        if(!id) return res.status(400).json("Missing ID!");
+            if(!id) return res.status(400).json("Missing ID!");
 
-        await Products.update({
-           product_name, 
-           price,
-           quantity,  
-        }, {
-            where: {
-                id,
-            },
-        });
+            await Products.update({
+            product_name, 
+            price,
+            quantity,  
+            }, {
+                where: {
+                    id,
+                },
+            });
 
-        res.json("Updated product!");
+            res.json("Updated product!");
         } catch (error) {
             return res.status(500).json("[ERROR]!");
         };
