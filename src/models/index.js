@@ -5,11 +5,11 @@ const CategoryProduct = require("./CategoryProduct");
 const Users = require("./Users");
 
 Products.belongsTo(Suppliers, {
-    foreignKey: 'supplier_id',
+    foreignKey: "supplier_id",
 });
 
 Suppliers.hasMany(Products, {
-    foreignKey: 'supplier_id',
+    foreignKey: "supplier_id",
 });
 
 Products.belongsToMany(Categories, {

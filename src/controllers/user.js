@@ -14,7 +14,7 @@ const user = {
 
             res.status(201).json(newUser);
         } catch (error) {
-            return res.status(401).json("Failure to try to register!");
+            return res.status(401).json("Failure when try to register a user!");
         };
     },
 

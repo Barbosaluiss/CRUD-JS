@@ -1,4 +1,4 @@
-const {Products, Suppliers, Categories} = require("../models/index");
+const {Products, Categories} = require("../models/index");
 
 const product = {
     async $list(req, res){
@@ -15,14 +15,17 @@ const product = {
 
     async $register(req, res){
         try {
-            const {product_name, price, quantity, supplier_id} = req.body;
+            const {product_name, price, quantity, supplier_id, category_id} = req.body;
             const newProduct = await Products.create({
                 product_name,
                 price,
                 quantity,
                 supplier_id,
-            });  
-            res.status(200).json(newProduct);
+            }); 
+            const category = await Categories.findByPk(category_id);
+            await newProduct.setCategories(category);
+            
+            res.status(201).json(newProduct);
         } catch (error) {
             return req.status(500).json("Failure when try to register a product!");
         };
