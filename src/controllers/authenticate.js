@@ -1,6 +1,7 @@
 const {Users} = require("../models/index");
 const bcrypt = require("bcryptjs");
 const JWT = require("jsonwebtoken");
+const secret = require("../configs/secret");
 
 const authenticate = {  
     async $login(req, res){
@@ -16,11 +17,18 @@ const authenticate = {
                 return res.status(400).json("User not found!");
             };
 
-            if(bcrypt.compareSync(pass, user.pass)){
+            if(!bcrypt.compareSync(pass, user.pass)){
                 return res.status(401).json("Invalid Password!");
             };
 
-            return res.json("Successfully login");
+            const token = JWT.sign({
+                id: user.id,
+                email: user.email,
+                name: user.user_name,
+            }, 
+            secret.key);
+
+            return res.json(token);
         } catch (error) {
             return res.status(500).json("[ERROR]!");
         };

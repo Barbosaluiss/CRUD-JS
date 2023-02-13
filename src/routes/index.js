@@ -7,11 +7,12 @@ const user = require("../controllers/user");
 const block = require("../middlewares/block");
 const userValidation = require("../validations/users/create");
 const loginAuthentication = require("../validations/authentication/login");
+const authentication = require("../middlewares/authentication");
 
 const routes = express.Router();
 
 routes.get("/products", block, product.$list);
-routes.post("/products", product.$register);
+routes.post("/products", authentication, product.$register);
 routes.delete("/products/:id", product.$delete);
 routes.put("/products/:id", product.$update);
 
