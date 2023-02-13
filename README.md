@@ -2,7 +2,7 @@
 
 Used technologies: 
 
-Language - Javascript/NodeJS
+Language - Javascript,
 Frameworks - Express(Server and routes),
            - ORM Sequelize,
            - MySQL (Database),
