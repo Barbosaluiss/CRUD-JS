@@ -1,12 +1,12 @@
 const Sequelize = require("sequelize");
 
-const DB_NAME = 'loja';
-const DB_USER = 'root';
-const DB_PASS = 'luissql'
+const DB_NAME = '';
+const DB_USER = '';
+const DB_PASS = ''
 const DB_CONFIG = {
-    dialect: 'mysql',
-    host: 'localhost',
-    port: 3306
+    dialect: '',
+    host: '',
+    port: ''
 };
 
 let db = {};
